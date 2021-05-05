@@ -8,81 +8,94 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 
 
-const Dashboard = (props) => {
-
-    const renderArtworksList = (props) => {
-
-        return props.artworks.map(artwork => (
-            <div onClick={() => props.addContent(artwork._id)}
-                 key={artwork._id}
-                // to={`/artworks/${artwork._id}`}
-                 className={styles['artworks-row']}
-                 activeClassName={styles['active-artworks-row']}
-            >
-                <div
-                    className={styles['artworks-avatar']}
-                    style={{
-                        backgroundImage: `url(/imgs/artworks/${artwork._id}.jpg)`
-                    }}
-                />
-                <span>{`${artwork.title} `}</span>
-            </div>
-        ));
-    }
-
-    const renderSpotLight = (artworksId) => {
-
-        const selectedArtworksId = artworksId
-        // props.match.params && props.match.params.artworksId;
-        if (!selectedArtworksId) {
-            return null;
-        }
-        const artworksInSpotlight = props.artworks.find(
-            artworks => artworks._id === selectedArtworksId
-        );
-        const label = `${artworksInSpotlight.title}`;
-
-        const imgUrl = `imgs/artworks/${artworksInSpotlight._id}.jpg`;
+class Dashboard extends Component {
+    render() {
         return (
-            <div className={styles['spotlight']}>
-                <div
-                    className={styles['spotlight-img']}
-                    style={{
-                        backgroundImage: `url(${imgUrl})`
-                    }}
-                />
-                <div className={styles['spotlight-label']}>{label}</div>
+            <div className={styles['dashboard']}>
+                <div>
+                    <h3 className={styles['header']}>Artworks</h3>
+                    {this.renderArtworksList()}
+                    {/*{props.addContent()}*/}
+
+                </div>
+                {this.renderSpotLight()}
             </div>
         );
     }
-    return (
-        <div className={styles['dashboard']}>
-            <div>
-                <h3 className={styles['header']}>Artworks</h3>
-                {renderArtworksList()}
-                {/*{props.addContent()}*/}
 
-            </div>
-            {renderSpotLight()}
-        </div>
-    );
+         renderArtworksList = () => {
+
+            return this.props.artworks.map(artwork => (
+                <div onClick={() => this.props.addContent(artwork._id)}
+                     key={artwork._id}
+                    // to={`/artworks/${artwork._id}`}
+                     className={ this.props.artworkId === artwork._id
+                         ? styles['active-artworks-row']
+                         : styles['artworks-row']}
+                     // activeclassName={styles['active-artworks-row']}
+                >
+                    <div
+                        className={styles['artworks-avatar']}
+                        style={{
+                            backgroundImage: `url(/imgs/artworks/${artwork._id}.jpg)`
+                        }}
+                    />
+                    <span>{`${artwork.title} `}</span>
+                </div>
+            ));
+        }
+
+       renderSpotLight = () => {
+
+            const selectedArtworksId = this.props.artworkId
+            // props.match.params && props.match.params.artworkId;
+            if (!selectedArtworksId) {
+                return null;
+            }
+            const artworksInSpotlight = this.props.artworks.find(
+                artworks => artworks._id === selectedArtworksId
+            );
+            const label = `${artworksInSpotlight.title}`;
+
+            const imgUrl = `imgs/artworks/${artworksInSpotlight._id}.jpg`;
+            return (
+                <div className={styles['spotlight']}>
+                    <div
+                        className={styles['spotlight-img']}
+                        style={{
+                            backgroundImage: `url(${imgUrl})`
+                        }}
+                    />
+                    <div className={styles['spotlight-label']}>{label}</div>
+                </div>
+            );
+        }
+
+
 }
 
 
 const mapStateToProps = (state) => {
+
     return {
-        artworksId: state.artworkId
+        artworkId: state.artworkId
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps ={
 
-    return {
-        addContent: (artworksId) => {
-            dispatch(addContentAC(artworksId))
-        }
-    }
+    addContent: addContentAC
 }
+
+// const mapDispatchToProps =(dispatch)=> {
+//
+//  return {
+//         addContent:(artworkId)=>{
+//          dispatch(addContentAC(artworkId))
+//
+//  }
+// }
+// }
 
 // const withRouterDashboard = withRouter (Dashboard)
 // const containerDashboard =connect() (withRouterDashboard)

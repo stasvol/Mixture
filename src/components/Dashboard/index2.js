@@ -9,46 +9,48 @@ class Dashboard extends React.Component {
     return (
       <div className={styles['dashboard']}>
         <div>
-          <h3 className={styles['header']}>Artists</h3>
-          {this.renderArtistList()}
+          <h3 className={styles['header']}>Artworks</h3>
+          {this.renderArtworksList()}
         </div>
         {this.renderSpotLight()}
       </div>
     );
   }
 
-  renderArtistList() {
-    return this.props.artists.map(artist => (
+
+  renderArtworksList() {
+
+    return this.props.artworks.map(artwork => (
       <NavLink
-        key={artist._id}
-        to={`/artists/${artist._id}`}
-        className={styles['artist-row']}
-        activeClassName={styles['active-artist-row']}
+        key={artwork._id}
+        to={`/artworks/${artwork._id}`}
+        className={styles['artworks-row']}
+        activeClassName={styles['active-artworks-row']}
       >
         <div
-          className={styles['artist-avatar']}
+          className={styles['artworks-avatar']}
           style={{
-            backgroundImage: `url(/imgs/artists/${artist._id}.png)`
+            backgroundImage: `url(/imgs/artworks/${artwork._id}.jpg)`
           }}
         />
-        <span>{`${artist.firstName} ${artist.lastName}`}</span>
+        <span>{`${artwork.title} `}</span>
       </NavLink>
     ));
   }
 
   renderSpotLight() {
+
     const props = this.props;
-    const selectedArtistId = props.match.params && props.match.params.artistId;
-    if (!selectedArtistId) {
+    const selectedArtworksId = props.match.params && props.match.params.artworksId;
+    if (!selectedArtworksId) {
       return null;
     }
-    const artistInSpotlight = props.artists.find(
-      artist => artist._id === selectedArtistId
+    const artworksInSpotlight = props.artworks.find(
+        artworks => artworks._id === selectedArtworksId
     );
-    const label = `${artistInSpotlight.firstName} ${
-      artistInSpotlight.lastName
-    }`;
-    const imgUrl = `imgs/artists/${artistInSpotlight._id}.png`;
+    const label = `${artworksInSpotlight.title}`;
+
+    const imgUrl = `imgs/artworks/${artworksInSpotlight._id}.jpg`;
     return (
       <div className={styles['spotlight']}>
         <div
@@ -64,3 +66,9 @@ class Dashboard extends React.Component {
 }
 
 export default withRouter(Dashboard);
+
+// let url = window.location.toString();
+// url = url.replace(/#anchor/,'');
+// window.location = url;
+// АБО :
+// // window.location.pathname = ''

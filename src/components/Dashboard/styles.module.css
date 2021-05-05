@@ -64,3 +64,37 @@
   margin: 20px 0;
   font-size: 25px;
 }
+
+.artworks-row {
+  /*width: 100%;*/
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e3e9e8;
+  padding: 0.3rem 0.5rem;
+  height: 4rem;
+  font-size: 1.1rem;
+  background-color: white;
+  text-Decoration: none;
+  color: black;
+  cursor: pointer;
+}
+
+.active-artworks-row {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e3e9e8;
+  padding: 0.3rem 0.5rem;
+  height: 4rem;
+  font-size: 1.1rem;
+  background-color: #f6fafb;
+  background-image: linear-gradient(108deg, rgb(235, 244, 244) 50%, rgb(251, 253, 253) 45%, rgb(255, 255, 255) 85%, rgb(255, 255, 255) 100%);
+  /*cursor: default;*/
+}
+
+.artworks-avatar {
+  height: 3rem;
+  width: 3rem;
+  margin: 0 0.6rem;
+  border-radius: 50%;
+  background-size: cover;
+}

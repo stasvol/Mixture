@@ -11,8 +11,10 @@ const enhance = connect(
 
 class NotesList extends React.Component {
   render() {
+
     if (!this.props.notes.length) {
       return this.renderAddButton();
+
     }
     return (
       <ul className={styles["note-list"]}>
@@ -28,9 +30,9 @@ class NotesList extends React.Component {
     );
   }
 
-  renderNote = note => <div className={styles["note-list-item"]}>{note}</div>;
+  renderNote = (note) => <div className={styles["note-list-item"]}>{note}</div>;
 
-  renderAddButton = (index = 0) => (
+  renderAddButton = (index= 0) => (
     <button
       data-index={index}
       className={styles["add-note"]}
@@ -42,7 +44,8 @@ class NotesList extends React.Component {
 
   onAddButtonClick = e => {
     const text = window.prompt("Note text:");
-    text && this.props.addNote(text, e.target.dataset.index);
+    text && this.props.addNote(text, Number(e.target.dataset.index));
+
   };
 }
 

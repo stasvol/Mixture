@@ -2,6 +2,7 @@ import React from "react";
 
 import NavBar from "../../NavBar";
 import Dashboard from "../../Dashboard";
+import Image from "../../Image";
 
 // consider this data arrived from the API
 // <donotmodify>
@@ -18,6 +19,7 @@ export default props => {
     <div>
       <NavBar />
       <Dashboard artists={artists} />
+        {/*<Image/>*/}
     </div>
   );
 };

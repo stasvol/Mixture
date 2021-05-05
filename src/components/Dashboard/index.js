@@ -37,6 +37,7 @@ class Dashboard extends React.Component {
   }
 
   renderSpotLight() {
+
     const props = this.props;
     const selectedArtistId = props.match.params && props.match.params.artistId;
     if (!selectedArtistId) {
